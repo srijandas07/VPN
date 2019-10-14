@@ -19,12 +19,12 @@ from utils import *
 epochs = int(sys.argv[1])
 model_name = sys.argv[2]
 protocol = sys.argv[3]
-num_classes = 120
+num_classes = 60
 batch_size = int(sys.argv[4])
-stack_size = 64
+stack_size = 16
 n_neuron = 64
 n_dropout = 0.3
-timesteps = 30
+timesteps = 16
 seed = 8
 np.random.seed(seed)
 
@@ -34,8 +34,6 @@ losses = {
 }
 lossWeights = {"action_output": 0.99, "embed_output": 0.01}
 
-learning_rate = 0.5
-decay_rate = learning_rate / epochs
 optim = SGD(lr=0.01, momentum=0.9)
 
 class CustomModelCheckpoint(Callback):
@@ -81,23 +79,23 @@ model = embed_model_spatio_temporal_gcnn(n_neuron, timesteps, num_nodes, num_fea
 
 paths = {
         'skeleton': '/data/stars/user/achaudha/NTU_RGB/skeleton_npy/',
-        'cnn': '/data/stars/user/sdas/NTU_extended/images/',
-        'split_path': '/data/stars/user/sdas/NTU_extended/splits/'
+        'cnn': '/data/stars/user/sdas/NTU_RGB/patches_full_body/',
+        'split_path': '/data/stars/user/sdas/NTU_RGB/splits/imp_files/'
     }
 
 if protocol == 'CS':
-   train = 'train'
-   test = 'validation'
+   train = 'train_new'
+   test = 'validation_new'
 else:
-   train = 'train_set'
-   test = 'validation_set'
+   train = 'train_cross'
+   test = 'validation_cross'
 
 model.compile(loss=losses, loss_weights=lossWeights, optimizer=optim, metrics=['accuracy'])
 parallel_model = multi_gpu_model(model, gpus=4)
 parallel_model.compile(loss=losses, loss_weights=lossWeights, optimizer=optim, metrics=['accuracy'])
 model.compile(loss=losses, loss_weights=lossWeights, optimizer=optim, metrics=['accuracy'])
-train_generator = DataGenerator(paths, graph_conv_filters, timesteps, train, num_classes, batch_size=batch_size)
-val_generator = DataGenerator(paths, graph_conv_filters, timesteps, test, num_classes, batch_size=batch_size)
+train_generator = DataGenerator(paths, graph_conv_filters, timesteps, train, num_classes, stack_size, batch_size=batch_size)
+val_generator = DataGenerator(paths, graph_conv_filters, timesteps, test, num_classes, stack_size, batch_size=batch_size)
 
 
 

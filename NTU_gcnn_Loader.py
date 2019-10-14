@@ -13,7 +13,7 @@ np.random.seed(seed)
 class DataGenerator(keras.utils.Sequence):
     'Generates data for Keras'
 
-    def __init__(self, paths, graph_conv_filters, timesteps, mode, num_classes, batch_size=32):
+    def __init__(self, paths, graph_conv_filters, timesteps, mode, num_classes, stack_size, batch_size=32):
         'Initialization'
         self.batch_size = batch_size
         self.path_skeleton = paths['skeleton']
@@ -21,7 +21,7 @@ class DataGenerator(keras.utils.Sequence):
         self.files = [i.strip() for i in open(paths['split_path'] + mode + '.txt').readlines()]
         self.graph_conv_filters = graph_conv_filters
         self.num_classes = num_classes
-        self.stack_size = 64
+        self.stack_size = stack_size
         self.stride = 2
         self.step = timesteps
         self.dim = 150  ##for two skeletons in a single frame
@@ -46,9 +46,7 @@ class DataGenerator(keras.utils.Sequence):
 
         return [X[:, 0, :, :], X[:, 1, :, :], X[:, 2, :, :], X[:, 3, :, :], X[:, 4, :, :], X[:, 5, :, :], X[:, 6, :, :],
                 X[:, 7, :, :], X[:, 8, :, :], X[:, 9, :, :], X[:, 10, :, :], X[:, 11, :, :], X[:, 12, :, :], X[:, 13, :, :],
-                X[:, 14, :, :], X[:, 15, :, :], X[:, 16, :, :], X[:, 17, :, :], X[:, 18, :, :], X[:, 19, :, :], X[:, 20, :, :], X[:, 21, :, :],
-                X[:, 22, :, :], X[:, 23, :, :], X[:, 24, :, :], X[:, 25, :, :], X[:, 26, :, :], X[:, 27, :, :], X[:, 28, :, :], X[:, 29, :, :], X,
-                graph_conv, x_data_cnn], [y_data, y_reg]
+                X[:, 14, :, :], X[:, 15, :, :], X, graph_conv, x_data_cnn], [y_data, y_reg]
 
     def on_epoch_end(self):
         'Updates indexes after each epoch'
@@ -64,7 +62,7 @@ class DataGenerator(keras.utils.Sequence):
         # Generate data
         for i, ID in enumerate(list_IDs_temp):
             # Store sample
-            unpadded_file = np.load(self.path_skeleton1 + ID + '.npy')
+            unpadded_file = np.load(self.path_skeleton + ID + '.npy')
             origin = unpadded_file[0, 3:6]
             [row, col] = unpadded_file.shape
             origin = np.tile(origin, (row, 50))

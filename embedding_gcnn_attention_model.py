@@ -16,20 +16,20 @@ from keras.layers import Conv2D, MaxPooling2D
 
 def inflate_dense_ST(x):
     a = RepeatVector(1024)(x)
-    a = Permute((2,1), input_shape=(392,1024))(a)
-    a = Reshape((8,7,7,1024))(a)
+    a = Permute((2,1), input_shape=(98,1024))(a)
+    a = Reshape((2,7,7,1024))(a)
     return a
 
 def inflate_dense_spatial(x):
-    a = RepeatVector(8*1024)(x)
-    a = Permute((2,1), input_shape=(49,8*1024))(a)
-    a = Reshape((8,7,7,1024))(a)
+    a = RepeatVector(2*1024)(x)
+    a = Permute((2,1), input_shape=(49,2*1024))(a)
+    a = Reshape((2,7,7,1024))(a)
     return a
 
 def inflate_dense_temporal(x):
     a = RepeatVector(49*1024)(x)
-    a = Permute((2,1), input_shape=(8,49*1024))(a)
-    a = Reshape((8,7,7,1024))(a)
+    a = Permute((2,1), input_shape=(2,49*1024))(a)
+    a = Reshape((2,7,7,1024))(a)
     return a
 
 def attention_reg(weight_mat):
@@ -57,9 +57,7 @@ class i3d_modified:
 
         return new_model
 
-
-
-def GCNN_skeleton(num_nodes, num_features, graph_conv_filters_shape1, graph_conv_filters_shape2, num_filters, num_classes, n_neuron, n_dropout, timesteps):
+def GCNN_skeleton_t16(num_nodes, num_features, graph_conv_filters_shape1, graph_conv_filters_shape2, num_filters, num_classes, n_neuron, n_dropout, timesteps):
     print('Build GCNN')
     X_input_t1 = Input(shape=(num_nodes, num_features))
     X_input_t2 = Input(shape=(num_nodes, num_features))
@@ -77,20 +75,6 @@ def GCNN_skeleton(num_nodes, num_features, graph_conv_filters_shape1, graph_conv
     X_input_t14 = Input(shape=(num_nodes, num_features))
     X_input_t15 = Input(shape=(num_nodes, num_features))
     X_input_t16 = Input(shape=(num_nodes, num_features))
-    X_input_t17 = Input(shape=(num_nodes, num_features))
-    X_input_t18 = Input(shape=(num_nodes, num_features))
-    X_input_t19 = Input(shape=(num_nodes, num_features))
-    X_input_t20 = Input(shape=(num_nodes, num_features))
-    X_input_t21 = Input(shape=(num_nodes, num_features))
-    X_input_t22 = Input(shape=(num_nodes, num_features))
-    X_input_t23 = Input(shape=(num_nodes, num_features))
-    X_input_t24 = Input(shape=(num_nodes, num_features))
-    X_input_t25 = Input(shape=(num_nodes, num_features))
-    X_input_t26 = Input(shape=(num_nodes, num_features))
-    X_input_t27 = Input(shape=(num_nodes, num_features))
-    X_input_t28 = Input(shape=(num_nodes, num_features))
-    X_input_t29 = Input(shape=(num_nodes, num_features))
-    X_input_t30 = Input(shape=(num_nodes, num_features))
 
     X_input = Input(shape=(timesteps, num_nodes, 3))
 
@@ -175,81 +159,19 @@ def GCNN_skeleton(num_nodes, num_features, graph_conv_filters_shape1, graph_conv
         output_t15)  # adding a node invariant layer to make sure output does not depends upon the node order in a graph.
     output16 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t16)
 
-    output_t17 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t17, graph_conv_filters_input])
-    output_t17 = Dropout(n_dropout)(output_t17)
-
-    output_t18 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t18, graph_conv_filters_input])
-    output_t18 = Dropout(n_dropout)(output_t18)
-
-    output17 = Lambda(lambda x: K.expand_dims(x, axis=1))(
-        output_t17)  # adding a node invariant layer to make sure output does not depends upon the node order in a graph.
-    output18 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t18)
-
-    output_t19 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t19, graph_conv_filters_input])
-    output_t19 = Dropout(n_dropout)(output_t19)
-
-    output_t20 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t20, graph_conv_filters_input])
-    output_t20 = Dropout(n_dropout)(output_t20)
-
-    output19 = Lambda(lambda x: K.expand_dims(x, axis=1))(
-        output_t19)  # adding a node invariant layer to make sure output does not depends upon the node order in a graph.
-    output20 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t20)
-
-    output_t21 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t21, graph_conv_filters_input])
-    output_t21 = Dropout(n_dropout)(output_t21)
-    output21 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t21)
-
-    output_t22 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t22, graph_conv_filters_input])
-    output_t22 = Dropout(n_dropout)(output_t22)
-    output22 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t22)
-
-    output_t23 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t23, graph_conv_filters_input])
-    output_t23 = Dropout(n_dropout)(output_t23)
-    output23 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t23)
-
-    output_t24 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t24, graph_conv_filters_input])
-    output_t24 = Dropout(n_dropout)(output_t24)
-    output24 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t24)
-
-    output_t25 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t25, graph_conv_filters_input])
-    output_t25 = Dropout(n_dropout)(output_t25)
-    output25 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t25)
-
-    output_t26 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t26, graph_conv_filters_input])
-    output_t26 = Dropout(n_dropout)(output_t26)
-    output26 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t26)
-
-    output_t27 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t27, graph_conv_filters_input])
-    output_t27 = Dropout(n_dropout)(output_t27)
-    output27 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t27)
-
-    output_t28 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t28, graph_conv_filters_input])
-    output_t28 = Dropout(n_dropout)(output_t28)
-    output28 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t28)
-
-    output_t29 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t29, graph_conv_filters_input])
-    output_t29 = Dropout(n_dropout)(output_t29)
-    output29 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t29)
-
-    output_t30 = MultiGraphCNN(n_neuron, num_filters, activation='elu')([X_input_t30, graph_conv_filters_input])
-    output_t30 = Dropout(n_dropout)(output_t30)
-    output30 = Lambda(lambda x: K.expand_dims(x, axis=1))(output_t30)
-
 
     output = keras.layers.Concatenate(axis=1)(
         [output1, output2, output3, output4, output5, output6, output7, output8, output9,
-         output10, output11, output12, output13, output14, output15, output16,
-         output17, output18, output19, output20, output21, output22, output23, output24, output25, output26, output27
-            , output28, output29, output30])
+         output10, output11, output12, output13, output14, output15, output16])
     output = keras.layers.Concatenate()([output, X_input])
     out = BatchNormalization()(output)
-    out = Conv2D(64, (3, 3), activation='relu')(out)
-    out = MaxPooling2D(pool_size=(2,2))(out)
+    out = Conv2D(64, (3, 3), activation='relu', padding='same')(out)
+    #out = MaxPooling2D(pool_size=(2,2))(out)
     out = BatchNormalization()(out)
-    out = Conv2D(64, (3, 3), activation='relu')(out)
+    out = Conv2D(64, (3, 3), activation='relu', padding='same')(out)
     out = MaxPooling2D(pool_size=(2, 2))(out)
     out = BatchNormalization()(out)
-    out = Conv2D(128, (3, 3), activation='relu')(out)
+    out = Conv2D(128, (3, 3), activation='relu', padding='same')(out)
     out = MaxPooling2D(pool_size=(2, 2))(out)
     out = BatchNormalization()(out)
     out = Dropout(0.5)(out)
@@ -260,11 +182,8 @@ def GCNN_skeleton(num_nodes, num_features, graph_conv_filters_shape1, graph_conv
     #output_final = Dense(num_classes, activation='softmax')(out_new)
     model = Model(inputs=[X_input_t1, X_input_t2, X_input_t3, X_input_t4, X_input_t5, X_input_t6, X_input_t7,
                           X_input_t8, X_input_t9, X_input_t10, X_input_t11, X_input_t12, X_input_t13, X_input_t14,
-                          X_input_t15, X_input_t16, X_input_t17, X_input_t18, X_input_t19, X_input_t20,
-                          X_input_t21, X_input_t22, X_input_t23, X_input_t24, X_input_t25, X_input_t26, X_input_t27,
-                          X_input_t28, X_input_t29, X_input_t30, X_input, graph_conv_filters_input], outputs=out_new)
+                          X_input_t15, X_input_t16, X_input, graph_conv_filters_input], outputs=out_new)
     return model
-
 
 
 def embed_model_spatio_temporal_gcnn(n_neuron, timesteps, num_nodes, num_features,
@@ -272,17 +191,18 @@ def embed_model_spatio_temporal_gcnn(n_neuron, timesteps, num_nodes, num_feature
                                      num_filters, num_classes, n_dropout, protocol):
     i3d = i3d_modified(weights = 'rgb_imagenet_and_kinetics')
     model_branch = i3d.i3d_flattened(num_classes = num_classes)
+    '''
     if protocol == 'CS':
-       model_branch.load_weights('/data/stars/user/sdas/PhD_work/CVPR20/NTU_120/I3D/weights_ntu_cs_retrain_full_body/epoch_17.hdf5')
+       model_branch.load_weights('/data/stars/user/sdas/PhD_work/STA_appearance/NTU_CS/i3d/weights_ntu_aug_4/epoch_7.hdf5')
     else:
        model_branch.load_weights('/data/stars/user/sdas/PhD_work/CVPR20/NTU_120/I3D/weights_ntu_set_i3d_full_body/epoch_12.hdf5')
+    '''
     optim = SGD(lr=0.01, momentum=0.9)
     model_branch.compile(loss='categorical_crossentropy', optimizer=optim, metrics=['accuracy'])
 
     print('Build model...')
     model_inputs=[]
-
-    model_gcnn = GCNN_skeleton(num_nodes, num_features, graph_conv_filters_shape1,
+    model_gcnn = GCNN_skeleton_t16(num_nodes, num_features, graph_conv_filters_shape1,
                                graph_conv_filters_shape2, num_filters, num_classes,
                                n_neuron, n_dropout, timesteps)
 
@@ -291,11 +211,11 @@ def embed_model_spatio_temporal_gcnn(n_neuron, timesteps, num_nodes, num_feature
 
     fc_main_spatial = Dense(49, activity_regularizer=attention_reg, kernel_initializer='zeros', bias_initializer='zeros',
                     activation='sigmoid', trainable=True, name='dense_spatial')(z1)
-    fc_main_temporal = Dense(8, activity_regularizer=attention_reg, kernel_initializer='zeros',
+    fc_main_temporal = Dense(2, activity_regularizer=attention_reg, kernel_initializer='zeros',
                             bias_initializer='zeros',
                             activation='softmax', trainable=True, name='dense_temporal')(z2)
-    atten_mask_spatial = keras.layers.core.Lambda(inflate_dense_spatial, output_shape=(8, 7, 7, 1024))(fc_main_spatial)
-    atten_mask_temporal = keras.layers.core.Lambda(inflate_dense_temporal, output_shape=(8, 7, 7, 1024))(fc_main_temporal)
+    atten_mask_spatial = keras.layers.core.Lambda(inflate_dense_spatial, output_shape=(2, 7, 7, 1024))(fc_main_spatial)
+    atten_mask_temporal = keras.layers.core.Lambda(inflate_dense_temporal, output_shape=(2, 7, 7, 1024))(fc_main_temporal)
     atten_mask = keras.layers.Multiply()([atten_mask_spatial, atten_mask_temporal])
 
     for l in model_branch.layers:

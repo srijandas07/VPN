@@ -1,4 +1,4 @@
-# VPN: Learning Video-PoseEmbedding for Activities of Daily Living (ECCV 2020)
+# VPN: Learning Video-Pose Embedding for Activities of Daily Living (ECCV 2020)
 ![](image.png)
 ## REQUIRED PACKAGES AND DEPENDENCIES
 

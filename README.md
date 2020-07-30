@@ -15,11 +15,12 @@ Will be available soon
 Warning: Do not use the current version!
 
 ## Citing VPN
-@misc{das2020vpn,
-    title={VPN: Learning Video-Pose Embedding for Activities of Daily Living},
-    author={Srijan Das and Saurav Sharma and Rui Dai and Francois Bremond and Monique Thonnat},
-    year={2020},
-    eprint={2007.03056},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
+
+    @misc{das2020vpn,
+        title={VPN: Learning Video-Pose Embedding for Activities of Daily Living},
+        author={Srijan Das and Saurav Sharma and Rui Dai and Francois Bremond and Monique Thonnat},
+        year={2020},
+        eprint={2007.03056},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }

@@ -192,7 +192,7 @@ def embed_model_spatio_temporal_gcnn(n_neuron, timesteps, num_nodes, num_feature
     i3d = i3d_modified(weights = 'rgb_imagenet_and_kinetics')
     model_branch = i3d.i3d_flattened(num_classes = num_classes)
     '''
-    if protocol == 'CS':
+    if protocol == 'CS': # to be replaced with the values in the yaml file
        model_branch.load_weights('/data/stars/user/sdas/PhD_work/STA_appearance/NTU_CS/i3d/weights_ntu_aug_4/epoch_7.hdf5')
     else:
        model_branch.load_weights('/data/stars/user/sdas/PhD_work/CVPR20/NTU_120/I3D/weights_ntu_set_i3d_full_body/epoch_12.hdf5')

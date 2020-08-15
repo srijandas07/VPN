@@ -272,11 +272,13 @@ def sparse_to_tuple(sparse_mx):
     shape = sparse_mx.shape
     return coords, values, shape
 
+# to read yaml files
 def read_yaml(filename):
     with open(filename, 'r') as f:
         yaml_cfg = yaml.safe_load(f)
     return yaml_cfg
 
+# to overwrite model specific values from yaml to args variable
 def map_yml_to_args(args, cfg):
     for key,val in cfg.items():
         setattr(args, key, val)

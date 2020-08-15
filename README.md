@@ -19,14 +19,15 @@ First,
 ### Dataset Instructions 
 * environment.yaml file will be provided
 
-### Pre-Trained Models
-|    Model   |    Dataset    |    Weights    |
-|------------|---------------|---------------|
-|     VPN    |  Smarthomes   | [Google Drive](https://drive.google.com/drive/u/0/my-drive)|
-|     VPN    |  NTU-60       | [Google Drive](https://drive.google.com/drive/u/0/my-drive)|
-|     VPN    |  NTU-120      | [Google Drive](https://drive.google.com/drive/u/0/my-drive)|
-|     VPN    |  NUCLA        | [Google Drive](https://drive.google.com/drive/u/0/my-drive)|
 
+### Pre-Trained Models
+
+|    Model   |    Dataset    |                           Weights                           |
+|------------|---------------|-------------------------------------------------------------|
+|     VPN    |  Smarthomes   | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
+|     VPN    |  NTU-60       | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
+|     VPN    |  NTU-120      | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
+|     VPN    |  NUCLA        | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
 
 
 ### Train
@@ -36,10 +37,6 @@ To train VPN with I3D as backbone on Smarthomes, execute the below line
 ### Test
 To test VPN with I3D as backbone on Smarthomes, execute the below line
 
-
-
-## Update the codes for NTU and Toyota Smarthome dataset. 
-Warning: Do not use the current version!
 
 ## Citing VPN
     @misc{das2020vpn,

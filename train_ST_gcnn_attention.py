@@ -107,3 +107,4 @@ parallel_model.fit_generator(generator=train_generator,
                     epochs=epochs,
                     callbacks = [csvlogger, model_checkpoint],
                     workers=cpu_count() - 2)
+

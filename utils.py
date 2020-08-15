@@ -1,5 +1,11 @@
+# ---------------------------------------------
+# Utility function for VPN
+# Written By Srijan Das
+# ---------------------------------------------
+
 from __future__ import print_function
 
+import yaml
 import scipy.sparse as sp
 import numpy as np
 from scipy.sparse.linalg.eigen.arpack import eigsh, ArpackNoConvergence
@@ -265,3 +271,13 @@ def sparse_to_tuple(sparse_mx):
     values = sparse_mx.data
     shape = sparse_mx.shape
     return coords, values, shape
+
+def read_yaml(filename):
+    with open(filename, 'r') as f:
+        yaml_cfg = yaml.safe_load(f)
+    return yaml_cfg
+
+def map_yml_to_args(args, cfg):
+    for key,val in cfg.items():
+        setattr(args, key, val)
+    return args    

@@ -1,0 +1,32 @@
+# Configuration file for NTU60 dataset and VPN as the model 
+---
+
+# Dataset Parameters
+num_classes : 60
+protocol : 'cs'
+train_ds_name : 'train_new'
+test_ds_name : 'validation_new'
+num_nodes : 25
+stack_size : 16
+n_neuron : 64
+n_dropout : 0.3
+timesteps : 16
+
+# GCN parameters
+sym_norm : True
+
+# File Locations
+paths:
+  skeleton :  '/data/stars/user/achaudha/NTU_RGB/skeleton_npy/'
+  cnn: '/data/stars/user/sdas/NTU_RGB/patches_full_body/'
+  split_path: '/data/stars/user/sdas/NTU_RGB/splits/imp_files/'
+
+
+# Training/Testing Parameters
+action_wt : 99.9
+embed_wt : 0.1
+lr : 0.01
+momentum : 0.01
+batch_size : 4
+weights_loc: './weights_'
+

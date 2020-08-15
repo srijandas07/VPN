@@ -1,6 +1,7 @@
-#--------------------------------
+#----------------------------------------
 # VPN main file to start the training
-#--------------------------------
+# Created By Srijan Das and Saurav Sharma
+#----------------------------------------
 
 import argparse
 import os
@@ -9,6 +10,7 @@ import yaml
 from utils import read_yaml, map_yml_to_args
 from train import trainer
 
+# base args file with default values for vpn training and testing
 def parse_args():
     parser = argparse.ArgumentParser(description='Video Pose Network')
 
@@ -57,6 +59,7 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+# args file loaded by default and overloaded by config yaml file
 def generate_config():
     args = parse_args()
     
@@ -67,14 +70,17 @@ def generate_config():
 
     # overwrite default args with dataset and model specific values
     args = map_yml_to_args(args, data_cfg)
+    print('>>>>>>>>>>>>>>>>>>>>>      Model Config       <<<<<<<<<<<<<<<<<<<<')
     print(args)
     print('--Config file loaded and updated--')
+    return args
 
+# main function to start the process
 def main():
     args = generate_config()
     
     # train models ..
-    #trainer(args)
+    trainer(args)
 
     # TO DO list
     # 1. Create a separate file for models to include multiple video models

@@ -15,7 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Video Pose Network')
 
     # model parameters
-    parser.add_argument('--dataset', default='ntu60', type=str, choices=['ntu60', 'ntu120','smarthomes','ucla'], help='training dataset')
+    parser.add_argument('--dataset', default='ntu60', type=str, choices=['ntu60', 'ntu120','smarthomes','nucla'], help='training dataset')
     parser.add_argument('--epochs', default=250, type=int, help='max mumber of epochs for training')
     parser.add_argument('--num_gpus', default=0, nargs='+', type=int, help='gpu ids for training')
     parser.add_argument('--model_name', default='vpn', type=str, choices=['vpn', 'i3d'], help='Model to use for training/validation')

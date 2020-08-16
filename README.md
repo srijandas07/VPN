@@ -5,7 +5,7 @@
 [![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/0)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/0)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/1)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/1)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/2)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/2)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/3)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/3)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/4)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/4)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/5)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/5)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/6)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/6)[![](https://sourcerer.io/fame/srv902/srijandas07/VPN/images/7)](https://sourcerer.io/fame/srv902/srijandas07/VPN/links/7)
 
 ## News
-Codes have been restructured and up for benchmarking on datasets.
+Codes have been restructured and ready for benchmarking on datasets.
 
 ## Introduction
 
@@ -21,16 +21,16 @@ We show the results of VPN on four activity recognition datasets of varied compl
 ## Get Started
 Before the start of VPN training, following steps should be completed
 
-* Create a new or use the existing configuration files stored in 'config' folder. The configuration files are specified by the model and the dataset type. Refer to args defined in the main.py file for more details.
+* Create a new or use the existing configuration files stored in 'config' folder. The configuration files are specified by the type of model and the dataset to use. Refer to args defined in the main.py file for more details.
 
 * Specify the paths of following files needed as input for VPN in the config yaml file.
     * Skeleton : 3D pose data stored as npz files for each video clip
-    * CNN      : RGB video data of 
+    * CNN      : RGB video data
     * Splits   : Training, Validation and Test video data splits
 
 * Make sure the necessary folders for storing model weights are created.
 
-* Currently, only NTU60 and NTU120 is working with this repo. Other datasets Smarthomes, NUCLA will be added in few weeks time. 
+* Currently, only NTU60 and NTU120 is supported and config files and related files will be updated for other datasets Smarthomes, NUCLA later. 
 
 
 ### Pre-Trained Models
@@ -51,9 +51,13 @@ python main.py --dataset ntu60
 ```
 
 ## ToDos
-- [x] Code restructuring to support future video datasets and 3D models
+- [x] Reorganize codebase to get started with model training quickly
 - [ ] Add support for Smarthomes and NUCLA datasets 
-- [ ] Benchmarking results from Paper
+- [ ] Benchmark results
+- [ ] Update results 
+- [ ] Upload Trained models
+- [ ] Upload Demo videos for all datasets 
+- [ ] Add support for other 3D video models 
 
 ## Citing VPN
     @misc{das2020vpn,

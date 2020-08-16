@@ -15,8 +15,21 @@ This repository contains implementation of the paper Video-Pose Embedding For Ac
 ![](image.png)
 
 ## Results
-We show the results of VPN on four activity recognition datasets of varied complexity - Smarthomes, NTU-60, NTU-120 and NUCLA. 
-* Results to be added from Paper.
+We show the results of VPN on four activity recognition datasets - Smarthomes, NTU-60, NTU-120 and NUCLA for different evaluation protocols. Currently, in this repo only I3D backbone is supported. 
+
+|    Backbone   |    Dataset    |   Protocol  |    Clip Width   |   Accuracy (%)   |                           Model                             |
+|---------------|---------------|-------------|-----------------|------------------|-------------------------------------------------------------|
+|     I3D       |  Smarthomes   |      CS     |       64        |       60.8       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|     I3D       |  Smarthomes   |     CV1     |       64        |       43.8       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|     I3D       |  Smarthomes   |     CV2     |       64        |       53.5       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|     I3D       |  NTU-60       |      CS     |       64        |       93.5       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|     I3D       |  NTU-60       |      CV     |       64        |       96.2       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|  ResNext-101  |  NTU-60       |      CS     |       64        |       95.5       |                                                             |
+|  ResNext-101  |  NTU-60       |      CV     |       64        |       98.0       |                                                             |
+|     I3D       |  NTU-120      |     CS1     |       64        |       86.3       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|     I3D       |  NTU-120      |     CS2     |       64        |       87.8       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+|     I3D       |  NUCLA        |      CV     |       64        |       93.5       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
+
 
 ## Get Started
 Before the start of VPN training, following steps should be completed
@@ -32,17 +45,6 @@ Before the start of VPN training, following steps should be completed
 
 * Currently, only NTU60 and NTU120 is supported and config files and related files will be updated for other datasets Smarthomes, NUCLA later. 
 
-
-### Pre-Trained Models
-
-|    Model   |    Dataset    |                           Weights                           |
-|------------|---------------|-------------------------------------------------------------|
-|     VPN    |  Smarthomes   | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
-|     VPN    |  NTU-60       | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
-|     VPN    |  NTU-120      | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
-|     VPN    |  NUCLA        | [Google Drive](https://drive.google.com/drive/u/0/my-drive) |
-
-
 ## Train
 To train VPN with I3D as backbone on NTU60, execute the below line. 
 
@@ -51,13 +53,13 @@ python main.py --dataset ntu60
 ```
 
 ## ToDos
-- [*] Reorganize codebase to get started with model training quickly
+- [x] Reorganize codebase to get started with model training quickly
 - [ ] Add support for Smarthomes and NUCLA datasets 
 - [ ] Benchmark results
 - [ ] Update results 
 - [ ] Upload Trained models
 - [ ] Upload Demo videos for all datasets 
-- [ ] Add support for other 3D video models 
+- [ ] Add support for other base 3D video models 
 
 ## Citing VPN
     @misc{das2020vpn,

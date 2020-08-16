@@ -21,7 +21,7 @@ We show the results of VPN on four activity recognition datasets of varied compl
 ## Get Started
 Before the start of VPN training, following steps should be completed
 
-* Create a new or use the existing configuration files stored in 'config' folder. The configuration files are specified by the type of model and the dataset to use. Refer to args defined in the main.py file for more details.
+* Create a new or use the existing configuration files stored in `config` folder. The configuration files are specified by the type of model and the dataset to use. Refer to args defined in the main.py file for more details.
 
 * Specify the paths of following files needed as input for VPN in the config yaml file.
     * Skeleton : 3D pose data stored as npz files for each video clip
@@ -51,7 +51,7 @@ python main.py --dataset ntu60
 ```
 
 ## ToDos
-- [x] Reorganize codebase to get started with model training quickly
+- [*] Reorganize codebase to get started with model training quickly
 - [ ] Add support for Smarthomes and NUCLA datasets 
 - [ ] Benchmark results
 - [ ] Update results 

@@ -18,7 +18,7 @@ This repository contains implementation of the paper Video-Pose Embedding For Ac
 We show the results of VPN on four activity recognition datasets - Smarthomes, NTU-60, NTU-120 and NUCLA for different evaluation protocols. Currently, in this repo only I3D backbone is supported. 
 
 |    Backbone   |    Dataset    |   Protocol  |    Clip Width   |   Accuracy (%)   |                           Model                             |
-|---------------|---------------|-------------|-----------------|------------------|-------------------------------------------------------------|
+|:-------------:|:-------------:|:-----------:|:---------------:|:----------------:|:-----------------------------------------------------------:|
 |     I3D       |  Smarthomes   |      CS     |       64        |       60.8       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
 |     I3D       |  Smarthomes   |     CV1     |       64        |       43.8       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |
 |     I3D       |  Smarthomes   |     CV2     |       64        |       53.5       |[Google Drive](https://drive.google.com/drive/u/0/my-drive)  |

@@ -1,4 +1,5 @@
 # VPN: Learning Video-Pose Embedding for Activities of Daily Living (ECCV 2020)
+Note: VPN++ Pytorch code is coming soon!!! Stay tuned...
 
 ## Contributors 
 
